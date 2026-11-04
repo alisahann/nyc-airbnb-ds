@@ -1,0 +1,34 @@
+variable,description,type,scale,role,note,pandas_dtype,n_unique,pct_missing,availability,primary_price_model
+listing_id,Listing ID,identifier,nominal,id,one row per listing,int64,37012,0.0,identifier,no
+name,Listing name,text,nominal,feature (text),free text; candidate for S13 text mining,str,35625,0.04,before_stay,yes
+host_id,Host ID,identifier,nominal,id,used to check host overlap between train and test,int64,26765,0.0,identifier,no
+host_since,Date the host joined Airbnb,date,interval,feature (derived),convert to host tenure in days,str,4000,0.05,before_stay,yes
+host_location,Where the host is based,categorical,nominal,feature (low value),"free-text location, mostly New York",str,1316,0.31,before_stay,yes
+host_response_time,How fast the host usually replies,categorical,ordinal,feature,within an hour < a few hours < a day < a few days or more,str,4,50.0,before_stay,yes
+host_response_rate,Share of messages the host answers,numeric continuous,ratio,feature,proportion 0-1,float64,77,50.0,before_stay,yes
+host_acceptance_rate,Share of booking requests accepted,numeric continuous,ratio,feature,proportion 0-1,float64,98,39.54,before_stay,yes
+host_is_superhost,Host has Superhost status (t/f),categorical binary,nominal,S11 target / feature,imbalanced,str,2,0.05,before_stay,yes
+host_total_listings_count,Number of listings the host has,numeric discrete,ratio,feature,count,float64,79,0.05,before_stay,yes
+host_has_profile_pic,Host has a profile picture (t/f),categorical binary,nominal,feature,,str,2,0.05,before_stay,yes
+host_identity_verified,Host identity verified (t/f),categorical binary,nominal,feature,,str,2,0.05,before_stay,yes
+neighbourhood,Neighbourhood of the listing,categorical,nominal,feature,high cardinality,str,220,0.0,before_stay,yes
+district,Borough of the listing,categorical,nominal,feature,5 boroughs,str,5,0.0,before_stay,yes
+city,City,categorical,nominal,excluded,constant after the New York filter,str,1,0.0,constant,no
+latitude,Latitude,numeric continuous,interval,feature,location,float64,17044,0.0,before_stay,yes
+longitude,Longitude,numeric continuous,interval,feature,location,float64,13557,0.0,before_stay,yes
+property_type,Type of property,categorical,nominal,feature,high cardinality,str,75,0.0,before_stay,yes
+room_type,Entire place / private / shared / hotel room,categorical,nominal,feature,alternative S11 target,str,4,0.0,before_stay,yes
+accommodates,Number of guests the listing fits,numeric discrete,ratio,feature,count,int64,17,0.0,before_stay,yes
+bedrooms,Number of bedrooms,numeric discrete,ratio,feature,count; studios may be missing instead of 0,float64,14,9.75,before_stay,yes
+amenities,List of amenities,text (list),nominal,feature (derived),amenity count and indicator features,str,31671,0.0,before_stay,yes
+price,Nightly price in local currency (USD),numeric continuous,ratio,TARGET,regression target,int64,733,0.0,target,no
+minimum_nights,Minimum nights per booking,numeric discrete,ratio,feature,count,int64,125,0.0,before_stay,yes
+maximum_nights,Maximum nights per booking,numeric discrete,ratio,feature,contains placeholder values,int64,278,0.0,before_stay,yes
+review_scores_rating,Overall rating (20-100),numeric discrete,ordinal (treated as interval),post-stay feature,missing when no reviews; excluded from primary price model,float64,53,27.65,after_stay,no
+review_scores_accuracy,Accuracy score (2-10),numeric discrete,ordinal (treated as interval),post-stay feature,missing when no reviews; excluded from primary price model,float64,9,27.72,after_stay,no
+review_scores_cleanliness,Cleanliness score (2-10),numeric discrete,ordinal (treated as interval),post-stay feature,missing when no reviews; excluded from primary price model,float64,9,27.69,after_stay,no
+review_scores_checkin,Check-in score (2-10),numeric discrete,ordinal (treated as interval),post-stay feature,missing when no reviews; excluded from primary price model,float64,9,27.75,after_stay,no
+review_scores_communication,Communication score (2-10),numeric discrete,ordinal (treated as interval),post-stay feature,missing when no reviews; excluded from primary price model,float64,9,27.71,after_stay,no
+review_scores_location,Location score (2-10),numeric discrete,ordinal (treated as interval),post-stay feature,missing when no reviews; excluded from primary price model,float64,8,27.75,after_stay,no
+review_scores_value,Value-for-money score (2-10),numeric discrete,ordinal (treated as interval),post-stay feature,guests judge value relative to price; excluded from primary price model,float64,9,27.75,after_stay,no
+instant_bookable,Can be booked instantly (t/f),categorical binary,nominal,feature,,str,2,0.0,before_stay,yes
