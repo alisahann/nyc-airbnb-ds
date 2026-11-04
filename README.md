@@ -42,6 +42,7 @@ Run the notebooks in order (later notebooks read files written by earlier ones).
 | 02 | `02_problem_definition.ipynb` | Problem definition, variable dictionary, target & metrics (S2) | done |
 | 03 | `03_python_toolkit.ipynb` | Python toolkit (`src/`), tests, data-quality report, clean-clone check (S3) | done |
 | 04 | `04_pandas_manipulation.ipynb` | NumPy & Pandas: selection, groupby, pivot tables, joins; writes `data/processed/ny_listings_enriched.pkl` (S4) | done |
+| 05 | `05_eda.ipynb` | Exploratory data analysis: 15 figures in `reports/figures/`, a dataset story per block (S5) | done |
 
 ## Environment
 ```bash
