@@ -1,0 +1,19 @@
+district,room_type,n_listings,median_price,mean_guests,superhost_share
+Bronx,Entire place,368,102.5,4.29,0.28
+Bronx,Private room,592,50.5,1.98,0.28
+Bronx,Shared room,31,28.0,1.48,0.1
+Brooklyn,Entire place,7206,130.0,3.82,0.23
+Brooklyn,Hotel room,15,119.0,2.27,0.27
+Brooklyn,Private room,7021,57.0,1.85,0.17
+Brooklyn,Shared room,230,35.0,1.87,0.19
+Manhattan,Entire place,10014,150.0,3.35,0.16
+Manhattan,Hotel room,247,179.0,2.82,0.15
+Manhattan,Private room,5975,77.0,1.89,0.16
+Manhattan,Shared room,292,62.5,1.79,0.14
+Queens,Entire place,1662,111.0,4.19,0.29
+Queens,Hotel room,9,109.0,2.11,0.0
+Queens,Private room,2903,50.0,1.89,0.18
+Queens,Shared room,130,43.0,1.75,0.15
+Staten Island,Entire place,147,115.0,4.59,0.42
+Staten Island,Private room,139,59.0,1.91,0.4
+Staten Island,Shared room,3,79.0,2.0,0.33
