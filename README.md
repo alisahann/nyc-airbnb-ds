@@ -38,6 +38,7 @@ artifacts/           saved models and pipelines (not in git)
 |---|---|---|---|
 | 01 | `01_first_look.ipynb` | Data check + first look (S1/S4) | done |
 | 02 | `02_problem_definition.ipynb` | Problem definition, variable dictionary, target & metrics (S2) | done |
+| 03 | `03_python_toolkit.ipynb` | Python toolkit (`src/`), tests, data-quality report, clean-clone check (S3) | done |
 
 ## Environment
 ```bash
@@ -46,6 +47,11 @@ conda activate dsproj
 jupyter lab
 ```
 Python 3.11, pandas 3.0, scikit-learn 1.9. Random seed: `42`.
+
+Run the tests (from the project root, no raw data needed):
+```bash
+python -m tests.test_src
+```
 
 ## Method notes
 - The train/test split is made at the start of preprocessing; the test set is used **once**, at the end.
