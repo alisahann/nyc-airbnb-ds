@@ -34,11 +34,14 @@ artifacts/           saved models and pipelines (not in git)
 ```
 
 ## Notebooks
+Run the notebooks in order (later notebooks read files written by earlier ones).
+
 | # | Notebook | Stage | Status |
 |---|---|---|---|
 | 01 | `01_first_look.ipynb` | Data check + first look (S1/S4) | done |
 | 02 | `02_problem_definition.ipynb` | Problem definition, variable dictionary, target & metrics (S2) | done |
 | 03 | `03_python_toolkit.ipynb` | Python toolkit (`src/`), tests, data-quality report, clean-clone check (S3) | done |
+| 04 | `04_pandas_manipulation.ipynb` | NumPy & Pandas: selection, groupby, pivot tables, joins; writes `data/processed/ny_listings_enriched.pkl` (S4) | done |
 
 ## Environment
 ```bash
