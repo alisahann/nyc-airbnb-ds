@@ -1,0 +1,11 @@
+check,column,n_violations,pct_violations
+unique listing_id,listing_id,0,0.0
+price >= 1 USD,price,28,0.076
+accommodates >= 1 guest,accommodates,13,0.035
+bedrooms between 0 and 20,bedrooms,1,0.003
+minimum_nights between 1 and 365,minimum_nights,16,0.043
+maximum_nights between 1 and 1125 (Airbnb default max),maximum_nights,18,0.049
+latitude inside the NYC bounding box,latitude,0,0.0
+longitude inside the NYC bounding box,longitude,0,0.0
+host_response_rate between 0 and 1,host_response_rate,0,0.0
+review_scores_rating between 20 and 100,review_scores_rating,0,0.0
