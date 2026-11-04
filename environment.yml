@@ -1,0 +1,18 @@
+name: dsproj
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - jupyterlab
+  - ipykernel
+  - pandas=3.0.6
+  - numpy
+  - matplotlib
+  - seaborn
+  - scipy
+  - statsmodels
+  - scikit-learn=1.9.1
+  - missingno
+  - xgboost
+  - lightgbm
+  - catboost
