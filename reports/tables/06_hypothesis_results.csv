@@ -1,0 +1,6 @@
+hypothesis,test,statistic,p,effect,nonparametric,p_holm,reject_H0 (alpha 0.05)
+H1 entire vs private (log price),Welch t,134.8614416823621,0.0,d = 1.42; ratio 2.27x,"Mann-Whitney p = 0, r_rb = 0.74",0.0,True
+H2 boroughs within entire places,Welch ANOVA,181.4172455221486,8.544488316017473e-111,eta² = 0.036,"Kruskal-Wallis p = 5e-172, eps² = 0.041",2.563346494805242e-110,True
+H3 Superhost share Manhattan vs others,two-proportion z,-13.601650701333858,3.9149650260647296e-42,diff = -0.056; h = -0.14,"chi² (5 boroughs) p = 1.8e-61, V = 0.09",7.829930052129459e-42,True
+H4 Superhost vs not (entire places),Welch t,-5.321593286337541,1.0648159126177315e-07,d = -0.09; ratio 0.946,"Mann-Whitney p = 8.7e-11, r_rb = -0.07",1.0648159126177315e-07,True
+H5 accommodates vs log price,Pearson r,0.5254510387360711,0.0,r = 0.53; r² = 0.28,Spearman rho = 0.55,0.0,True

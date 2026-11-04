@@ -1,0 +1,16 @@
+borough,room_type,n,median,ci_low,ci_high
+Bronx,Entire place,368,102.5,100.0,110.0
+Bronx,Private room,592,50.5,50.0,55.0
+Bronx,Shared room,31,28.0,25.0,50.0
+Brooklyn,Entire place,7206,130.0,129.0,130.0
+Brooklyn,Private room,7021,57.0,55.0,59.0
+Brooklyn,Shared room,230,35.0,33.5,40.0
+Manhattan,Entire place,10014,150.0,150.0,155.0
+Manhattan,Hotel room,247,179.0,155.0,231.0
+Manhattan,Private room,5975,77.0,75.0,79.0
+Manhattan,Shared room,292,62.5,55.0,67.0
+Queens,Entire place,1662,111.0,110.0,117.5
+Queens,Private room,2903,50.0,50.0,53.0
+Queens,Shared room,130,43.0,39.0,48.0
+Staten Island,Entire place,147,115.0,100.0,125.0
+Staten Island,Private room,139,59.0,50.0,63.0

@@ -1,0 +1,14 @@
+,coef,ci_low,ci_high,p
+Intercept,4.8258,4.7779,4.8737,0.0
+"C(district, Treatment('Manhattan'))[T.Bronx]",-0.4755,-0.5266,-0.4245,0.0
+"C(district, Treatment('Manhattan'))[T.Brooklyn]",-0.2324,-0.2483,-0.2165,0.0
+"C(district, Treatment('Manhattan'))[T.Queens]",-0.3966,-0.4226,-0.3706,0.0
+"C(district, Treatment('Manhattan'))[T.Staten Island]",-0.4699,-0.547,-0.3928,0.0
+C(guests)[T.2],0.1538,0.1048,0.2028,0.0
+C(guests)[T.3],0.2029,0.1525,0.2533,0.0
+C(guests)[T.4],0.3644,0.3142,0.4147,0.0
+C(guests)[T.5],0.5066,0.4505,0.5627,0.0
+C(guests)[T.6],0.6764,0.62,0.7329,0.0
+C(guests)[T.7],0.8105,0.7204,0.9007,0.0
+C(guests)[T.8],1.1354,1.0664,1.2044,0.0
+superhost,-0.0548,-0.0724,-0.0371,0.0
