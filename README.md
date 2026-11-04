@@ -2,14 +2,19 @@
 
 Design Project course work. An end-to-end data science project on New York City Airbnb listings, following the structure of the course *Python A-Z: Veri Bilimi ve Machine Learning* (M. Vahit Keskin): data literacy → Pandas → EDA → statistics → preprocessing → machine learning (regression, classification, unsupervised).
 
-## Business question (draft)
-What drives the nightly price of an Airbnb listing in New York City, and how accurately can we estimate a listing's (historical) price from its characteristics?
+## Business question
+How accurately can we estimate the historical (early-2021) nightly price of a New York City Airbnb listing from characteristics known **before guests stay**, and which characteristics drive it?
+Secondary question: which listing and host characteristics are associated with Superhost status?
+
+## Targets and metrics
+- **Regression:** `price` (USD), modeled as `log(1 + price)`. Primary metric: cross-validated RMSE on the log scale; MAE and median absolute error in USD for interpretation; median baseline (`DummyRegressor`).
+- **Classification:** `host_is_superhost`. Primary metric: ROC-AUC; PR-AUC, recall and F1 for the Superhost class.
+- Review scores are created after a stay, so they are excluded from the primary price model.
 
 ## Data
 - **Source:** Kaggle – [Airbnb Listings & Reviews](https://www.kaggle.com/datasets/mysarahmadbhat/airbnb-listings-reviews) (mysarahmadbhat), originally from Inside Airbnb via Maven Analytics.
 - **License:** CC0 Public Domain.
 - **Scope:** New York City subset – 37,012 listings × 33 columns. Snapshot is historical (last review 2021-02-05, COVID period).
-- **Target:** `price` (USD per night). Classification candidate: `host_is_superhost`.
 
 Raw data is **not** committed. To reproduce:
 1. Download the dataset zip from the Kaggle link above.
@@ -32,6 +37,7 @@ artifacts/           saved models and pipelines (not in git)
 | # | Notebook | Stage | Status |
 |---|---|---|---|
 | 01 | `01_first_look.ipynb` | Data check + first look (S1/S4) | done |
+| 02 | `02_problem_definition.ipynb` | Problem definition, variable dictionary, target & metrics (S2) | done |
 
 ## Environment
 ```bash
