@@ -15,6 +15,8 @@ from src.quality import DataQualityChecker, DataQualityError, RangeRule
 from src.split_utils import attach_split, train_test
 from src.preprocess import (AmenityIndicators, QuantileClipper, build_features, feature_spec,
                             make_preprocessor, spec_columns)
+from src.cv_utils import (check_folds, classification_metrics, load_folds, make_cv_folds, paired_comparison,
+                          regression_metrics, save_folds)
 import numpy as np
 
 
@@ -174,6 +176,47 @@ def test_make_preprocessor_outputs_complete_matrix():
         X = pre.fit_transform(f)
         assert X.shape[0] == 6 and not np.isnan(X).any(), family
         assert len(pre.get_feature_names_out()) == X.shape[1]
+
+
+def test_make_preprocessor_multivariate_imputers():
+    f = build_features(_raw_listings())
+    for imp in ["knn", "iterative"]:
+        pre = make_preprocessor("scaled", feature_spec("price"), min_frequency=1, imputer=imp)
+        X = pre.fit_transform(f)
+        assert X.shape[0] == 6 and not np.isnan(X).any(), imp
+        assert len(pre.get_feature_names_out()) == X.shape[1]
+    assert _raises(ValueError, make_preprocessor, "tree", feature_spec("price"), imputer="knn")
+
+
+def _toy_hosts() -> pd.DataFrame:
+    rng = np.random.default_rng(0)
+    hosts = np.repeat(np.arange(40), 3)                          # 40 hosts x 3 listings
+    return pd.DataFrame({"listing_id": np.arange(120), "host_id": hosts,
+                         "room_type": rng.choice(["Entire place", "Private room"], 120),
+                         "host_is_superhost": np.repeat(rng.integers(0, 2, 40), 3).astype(float),
+                         "price": rng.integers(20, 300, 120)})
+
+
+def test_cv_folds_are_host_disjoint_and_reloadable():
+    d = _toy_hosts()
+    assign = make_cv_folds(d, "price")
+    assert sorted(assign["fold"].unique()) == [0, 1, 2, 3, 4]
+    with tempfile.TemporaryDirectory() as tmp:
+        save_folds(assign, "price", {"note": "toy"}, Path(tmp))
+        folds = load_folds(d.sample(frac=1, random_state=1).reset_index(drop=True), "price", Path(tmp))
+        assert sum(len(va) for _, va in folds) == len(d)
+        assert (Path(tmp) / "cv_manifest.json").exists()
+    bad = assign.copy(); bad.loc[0, "fold"] = (bad.loc[1, "fold"] + 1) % 5   # host 0 split across folds
+    assert _raises(ValueError, check_folds, bad)
+
+
+def test_cv_metrics_and_paired_se():
+    m = regression_metrics(np.log1p([100, 200]), np.log1p([100, 100]))
+    assert abs(m["mae_usd"] - 50) < 1e-9 and abs(m["medae_usd"] - 50) < 1e-9
+    c = classification_metrics([0, 0, 1, 1], [0.1, 0.4, 0.35, 0.8])
+    assert abs(c["roc_auc"] - 0.75) < 1e-9 and c["recall"] == 0.5
+    p = paired_comparison([1.0, 2.0, 3.0], [0.0, 0.0, 0.0])
+    assert p["mean_diff"] == 2.0 and abs(p["se_diff"] - 1 / np.sqrt(3)) < 1e-12
 
 
 def run_all() -> pd.DataFrame:
