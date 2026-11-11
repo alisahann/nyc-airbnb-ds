@@ -24,6 +24,7 @@ Raw data is **not** committed. To reproduce:
 ```
 data/raw/            raw Kaggle files (not in git)
 data/processed/      cleaned data produced by notebooks (not in git)
+data/splits/         frozen train/test assignment (listing_id -> split) + manifest (in git)
 notebooks/           one notebook per stage, run in order
 src/                 reusable Python functions
 configs/             settings (random_state, paths)
@@ -44,6 +45,7 @@ Run the notebooks in order (later notebooks read files written by earlier ones).
 | 04 | `04_pandas_manipulation.ipynb` | NumPy & Pandas: selection, groupby, pivot tables, joins; writes `data/processed/ny_listings_enriched.pkl` (S4) | done |
 | 05 | `05_eda.ipynb` | Exploratory data analysis: 17 figures in `reports/figures/`, a dataset story per block, stratified views with CIs (S5) | done |
 | 06 | `06_statistics.ipynb` | Statistics: sampling, CIs, distributions, hypothesis tests with effect sizes and Holm correction, adjusted OLS (S6) | done |
+| 07 | `07_split_preprocessing.ipynb` | Host-grouped train/test split (no host in both), training-only preprocessing audit (outliers, IQR/LOF, missing data, encoding, scaling), preprocessing pipeline and imputation masking experiment (S7) | done |
 
 ## Environment
 ```bash
@@ -59,5 +61,5 @@ python -m tests.test_src
 ```
 
 ## Method notes
-- The train/test split is made at the start of preprocessing; the test set is used **once**, at the end.
+- The train/test split is made at the start of preprocessing and grouped by host (`StratifiedGroupKFold` by `host_id`, stratified on `room_type`), so no host appears in both parts; the test set is used **once**, at the end. Later notebooks load it with `src.split_utils.train_test(df)`.
 - All learned preprocessing steps are fitted inside scikit-learn Pipelines to avoid data leakage.
