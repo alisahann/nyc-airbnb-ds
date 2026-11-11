@@ -1,0 +1,17 @@
+task,model,scheme,rows (by random-CV status),n,log_rmse,mae_usd,roc_auc,pr_auc,prevalence
+price,Ridge (scaled),random,host seen in fitting part,10409,0.4564,53.6091,,,
+price,Ridge (scaled),random,host unseen,19178,0.4505,58.1551,,,
+price,Ridge (scaled),host-grouped,host seen in fitting part,10409,0.4747,55.3811,,,
+price,Ridge (scaled),host-grouped,host unseen,19178,0.4513,58.233,,,
+price,RandomForest (tree),random,host seen in fitting part,10409,0.374,44.3509,,,
+price,RandomForest (tree),random,host unseen,19178,0.4502,58.3351,,,
+price,RandomForest (tree),host-grouped,host seen in fitting part,10409,0.4772,55.4566,,,
+price,RandomForest (tree),host-grouped,host unseen,19178,0.4502,58.3147,,,
+superhost,Logistic L2 (scaled),random,host seen in fitting part,10366,,,0.7825,0.5492,0.2583
+superhost,Logistic L2 (scaled),random,host unseen,19228,,,0.8414,0.4614,0.1576
+superhost,Logistic L2 (scaled),host-grouped,host seen in fitting part,10366,,,0.719,0.4621,0.2583
+superhost,Logistic L2 (scaled),host-grouped,host unseen,19228,,,0.8417,0.4616,0.1576
+superhost,RandomForest (tree),random,host seen in fitting part,10366,,,0.9251,0.8432,0.2583
+superhost,RandomForest (tree),random,host unseen,19228,,,0.8496,0.4901,0.1576
+superhost,RandomForest (tree),host-grouped,host seen in fitting part,10366,,,0.7425,0.4873,0.2583
+superhost,RandomForest (tree),host-grouped,host unseen,19228,,,0.8487,0.4914,0.1576

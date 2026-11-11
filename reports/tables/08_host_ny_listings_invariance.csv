@@ -1,0 +1,13 @@
+check,rows,mismatches
+train part vs full data,29609,0
+price fold 0: only this fold's hosts,5919,0
+price fold 1: only this fold's hosts,5921,0
+price fold 2: only this fold's hosts,5917,0
+price fold 3: only this fold's hosts,5917,0
+price fold 4: only this fold's hosts,5917,0
+superhost fold 0: only this fold's hosts,5919,0
+superhost fold 1: only this fold's hosts,5919,0
+superhost fold 2: only this fold's hosts,5919,0
+superhost fold 3: only this fold's hosts,5918,0
+superhost fold 4: only this fold's hosts,5919,0
+all prices set to 0,29609,0

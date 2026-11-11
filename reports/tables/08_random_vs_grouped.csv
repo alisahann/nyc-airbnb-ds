@@ -1,0 +1,13 @@
+task,model,metric,random CV,random SD,grouped CV,grouped SD,gap (random - grouped),gap % of grouped
+price,Ridge (scaled),log_rmse,0.4525,0.01013,0.45964,0.00773,-0.00714,-1.55379
+price,Ridge (scaled),mae_usd,56.55573,2.4659,57.22966,3.25751,-0.67392,-1.17758
+price,Ridge (scaled),medae_usd,23.3054,0.24395,23.75613,0.69489,-0.45073,-1.89731
+price,Ridge (scaled),r2_log,0.59565,0.01021,0.58201,0.02084,0.01365,2.34447
+price,RandomForest (tree),log_rmse,0.42482,0.0116,0.45983,0.00764,-0.03501,-7.61363
+price,RandomForest (tree),mae_usd,53.41524,2.57065,57.30917,3.26551,-3.89393,-6.79461
+price,RandomForest (tree),medae_usd,20.43552,0.37488,23.43801,0.79523,-3.00249,-12.81035
+price,RandomForest (tree),r2_log,0.64359,0.01267,0.58159,0.02301,0.062,10.66113
+superhost,Logistic L2 (scaled),roc_auc,0.82304,0.00484,0.79959,0.01235,0.02345,2.93257
+superhost,Logistic L2 (scaled),pr_auc,0.50203,0.00793,0.46206,0.01386,0.03997,8.6504
+superhost,RandomForest (tree),roc_auc,0.88426,0.00398,0.81506,0.00663,0.0692,8.4908
+superhost,RandomForest (tree),pr_auc,0.68332,0.00667,0.49071,0.01398,0.19261,39.25033

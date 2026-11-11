@@ -1,0 +1,9 @@
+variant,rows,n,log_rmse,mae_usd,mean residual (log)
+median + flags (D16),bedrooms missing,2911,0.45343,49.12502,-0.0061
+median + flags (D16),bedrooms observed,26676,0.46037,58.11411,-0.0008
+"median, bedrooms = 0",bedrooms missing,2911,0.45343,49.12358,-0.00593
+"median, bedrooms = 0",bedrooms observed,26676,0.46037,58.1144,-0.00082
+KNN (k=5),bedrooms missing,2911,0.45563,49.55567,-0.0085
+KNN (k=5),bedrooms observed,26676,0.4606,58.13575,-0.00076
+ExtraTrees iterative,bedrooms missing,2911,0.45284,49.14248,-0.00814
+ExtraTrees iterative,bedrooms observed,26676,0.46062,58.12318,-0.00084

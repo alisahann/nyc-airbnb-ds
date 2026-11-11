@@ -1,0 +1,16 @@
+item,status,evidence
+Test set never used for fitting or exploration,OK,"notebook loads only the train part (train_test -> train, _); folds built on train only; test locked until S14 (D13)"
+Hosts never split between fitting and validation folds,OK,host overlap 0 in all 10 folds (Part A); check_folds raises otherwise
+Same folds for every model of a task,OK,persisted data/splits/cv_folds_<task>.csv + manifest; load_folds
+All learned preprocessing fitted inside folds,OK,"evaluate_cv clones the full Pipeline per fold (imputers, clip bounds, scaler, one-hot vocabularies, amenity vocabulary); unit tests for fit-only behaviour"
+No target encoding / no target-derived inputs,OK,make_preprocessor has no target encoder; price and host_is_superhost not inputs of their own task (checks above)
+No post-stay / review information in primary models,OK,review_scores_* and review-activity columns not in the specs (D7); has_reviews ablation-only
+Superhost primary excludes the host-activity block,OK,check above (REVIEW #10); ablation keeps it
+host_ny_listings uses only the host's own rows,OK / LIMITATION,0 mismatches in 12 invariance checks; snapshot-time count incl. current listing (may include later listings)
+host_is_superhost in the price model,LIMITATION,kept per D7; assumed observable at the pricing decision point; separate ablation in S9
+Duplicate inputs across hosts / folds,OK,"198 rows in 50 identical-input groups, all single-host; 0 cross-host, 0 cross-fold"
+Random-CV optimism quantified,OK,random K-fold overstates forest PR-AUC by 39% and log-RMSE by 7.6%; host-grouped folds used (Part B)
+Suspiciously good scores,OK,"reference models: price -35% vs baseline (audit threshold -60%), ROC-AUC 0.80-0.82 (threshold 0.95)"
+Hyperparameter selection optimism,LIMITATION,"tuning and comparison on the same folds, no nested CV; locked test set gives the final estimate"
+Classification threshold,PLANNED (S11),"chosen on train OOF predictions, frozen before S14; OOF max-F1 not reported as unbiased"
+Imputation choice,OK,"chosen by host-grouped CV with the pre-registered 1-SE rule (Part C, D18)"

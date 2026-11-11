@@ -1,0 +1,3 @@
+task,input_cols,rows_in_duplicate_groups,share_%,groups,groups_multi_host,groups_cross_fold,rows_in_cross_fold_groups,cross_fold_groups_same_price
+price,28,198,0.67,50,0,0,0,0
+superhost,22,198,0.67,50,0,0,0,0
