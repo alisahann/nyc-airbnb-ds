@@ -13,7 +13,9 @@ import numpy as np
 import pandas as pd
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.compose import ColumnTransformer
-from sklearn.impute import SimpleImputer
+from sklearn.ensemble import ExtraTreesRegressor
+from sklearn.experimental import enable_iterative_imputer  # noqa: F401  (activates IterativeImputer)
+from sklearn.impute import IterativeImputer, KNNImputer, SimpleImputer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import FunctionTransformer, OneHotEncoder, StandardScaler
 from sklearn.utils.validation import check_is_fitted
@@ -158,7 +160,8 @@ class AmenityIndicators(BaseEstimator, TransformerMixin):
 
 
 def make_preprocessor(family: str, spec: dict, bedrooms_fill: str = "median",
-                      clip: tuple = (0.01, 0.99), min_frequency: int = 30) -> ColumnTransformer:
+                      clip: tuple = (0.01, 0.99), min_frequency: int = 30, imputer: str = "median",
+                      random_state: int = 42) -> ColumnTransformer:
     """ColumnTransformer for a model family.
 
     family: 'ols' (plain linear regression: reference levels dropped; neighbourhood and property_type
@@ -166,11 +169,20 @@ def make_preprocessor(family: str, spec: dict, bedrooms_fill: str = "median",
             matrix rank-deficient), 'scaled' (regularized linear, KNN, SVM, ANN, PCA, clustering) or
             'tree' (no clipping, no log, no scaling).
     bedrooms_fill: 'median' or 'zero' (studio hypothesis; compared in CV).
+    imputer: 'median' (default, column-wise), 'knn' (KNNImputer, k=5) or 'iterative' (IterativeImputer
+            with ExtraTrees). The multivariate options (ols/scaled only) treat all numeric columns as one
+            block: clip -> log1p (skewed counts, bedrooms) -> standardize -> impute -> standardize again,
+            so KNN distances are computed on comparable scales (REVIEW #11). Missing flags come from
+            build_features in every variant. Compared by CV in notebook 08 Part C.
     """
     if family not in ("ols", "scaled", "tree"):
         raise ValueError("family must be 'ols', 'scaled' or 'tree'")
     if bedrooms_fill not in ("median", "zero"):
         raise ValueError("bedrooms_fill must be 'median' or 'zero'")
+    if imputer not in ("median", "knn", "iterative"):
+        raise ValueError("imputer must be 'median', 'knn' or 'iterative'")
+    if imputer != "median" and family == "tree":
+        raise ValueError("the tree family uses median imputation (or native NaN handling in S10)")
     bed_imp = SimpleImputer(strategy="median") if bedrooms_fill == "median" else SimpleImputer(strategy="constant", fill_value=0)
     log1p = FunctionTransformer(np.log1p, feature_names_out="one-to-one")
     cat_high = list(spec["cat_high"])
@@ -197,9 +209,26 @@ def make_preprocessor(family: str, spec: dict, bedrooms_fill: str = "median",
         low = OneHotEncoder(handle_unknown="ignore", sparse_output=False)
         high = OneHotEncoder(min_frequency=min_frequency, handle_unknown="infrequent_if_exist", sparse_output=False)
 
-    parts = [("skewed", skewed, spec["skewed"]), ("bedrooms", bedrooms, spec["bedrooms"]),
-             ("numeric", numeric, spec["numeric"]), ("binary", binary, spec["binary"]),
-             ("cat_low", low, spec["cat_low"])]
+    if imputer == "median":
+        parts = [("skewed", skewed, spec["skewed"]), ("bedrooms", bedrooms, spec["bedrooms"]),
+                 ("numeric", numeric, spec["numeric"])]
+    else:
+        bed_steps = [("fill0", SimpleImputer(strategy="constant", fill_value=0))] if bedrooms_fill == "zero" else []
+        prep = ColumnTransformer([
+            ("skewed", Pipeline([("clip", QuantileClipper(*clip)), ("log1p", log1p)]), spec["skewed"]),
+            ("bedrooms", Pipeline(bed_steps + [("clip", QuantileClipper(*clip)),
+                                               ("log1p", FunctionTransformer(np.log1p, feature_names_out="one-to-one"))]),
+             spec["bedrooms"]),
+            ("numeric", QuantileClipper(*clip), spec["numeric"])], remainder="drop", sparse_threshold=0.0)
+        if imputer == "knn":
+            imp = KNNImputer(n_neighbors=5)
+        else:
+            imp = IterativeImputer(estimator=ExtraTreesRegressor(n_estimators=30, min_samples_leaf=5, n_jobs=-1,
+                                                                 random_state=random_state),
+                                   max_iter=5, random_state=random_state)
+        block = Pipeline([("prep", prep), ("scale", StandardScaler()), ("impute", imp), ("rescale", StandardScaler())])
+        parts = [("num_block", block, list(spec["skewed"]) + list(spec["bedrooms"]) + list(spec["numeric"]))]
+    parts += [("binary", binary, spec["binary"]), ("cat_low", low, spec["cat_low"])]
     if cat_high:
         parts.append(("cat_high", high, cat_high))
     if spec.get("amenities"):
