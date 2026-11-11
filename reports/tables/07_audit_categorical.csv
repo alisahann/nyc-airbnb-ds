@@ -1,0 +1,7 @@
+variable,levels,top_level,top_share_%,levels_<10_rows,levels_<30_rows,rows_in_levels_<30_%,levels_for_95%_rows
+neighbourhood,220,Williamsburg,7.4,64,119,3.95,93
+district,5,Manhattan,45.2,0,0,0.0,3
+property_type,75,Entire apartment,41.7,41,53,1.07,12
+room_type,4,Entire place,52.4,0,0,0.0,2
+host_response_time,4,within an hour,53.7,0,0,0.0,4
+host_location,1119,"New York, New York, United States",64.2,1057,1096,8.58,135

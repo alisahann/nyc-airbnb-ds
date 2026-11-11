@@ -1,0 +1,16 @@
+,n_train,pct
+accommodates == 0,10,0.03
+bedrooms == 0,0,0.0
+bedrooms missing,2933,9.91
+bedrooms > accommodates,158,0.53
+minimum_nights > maximum_nights,1,0.0
+minimum_nights >= 30 (NYC short-stay rule),19778,66.8
+minimum_nights > 365,16,0.05
+maximum_nights == 1125 (Airbnb default),16450,55.56
+maximum_nights > 1125,12,0.04
+"maximum_nights >= 1,000,000",2,0.01
+host_total_listings_count == 0,3692,12.47
+host_total_listings_count < NYC listings of host,6100,20.6
+coordinates outside NYC box,0,0.0
+host_since after snapshot,0,0.0
+n_amenities == 0,0,0.0

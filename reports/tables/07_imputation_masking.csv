@@ -1,0 +1,13 @@
+,,MAE,MAE,RMSE,RMSE
+,,mean,std,mean,std
+variable,method,,,,
+bedrooms,Iterative BayesianRidge (MICE-like),0.2703,0.0056,0.5305,0.0708
+bedrooms,Iterative ExtraTrees (RF-based),0.2224,0.0036,0.4991,0.0758
+bedrooms,KNN (k=5),0.235,0.0069,0.5353,0.0773
+bedrooms,group median (room x borough),0.3271,0.0124,0.8331,0.0539
+bedrooms,median,0.3273,0.0129,0.837,0.0546
+host_acceptance_rate,Iterative BayesianRidge (MICE-like),0.186,0.0046,0.2572,0.0063
+host_acceptance_rate,Iterative ExtraTrees (RF-based),0.1644,0.0031,0.2777,0.007
+host_acceptance_rate,KNN (k=5),0.1657,0.0049,0.2599,0.0063
+host_acceptance_rate,group median (room x borough),0.1798,0.0103,0.2997,0.0149
+host_acceptance_rate,median,0.1804,0.0101,0.2999,0.0142

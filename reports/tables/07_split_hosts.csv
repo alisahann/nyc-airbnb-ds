@@ -1,0 +1,3 @@
+split,largest_host_listings,largest_host_share_%,top5_hosts_share_%,single_listing_host_rows_%,rows_from_hosts_>=10_%
+train,181,0.61,2.45,61.92,10.9
+test,255,3.44,6.61,61.96,10.98
