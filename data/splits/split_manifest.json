@@ -1,0 +1,66 @@
+{
+  "decision": "D13",
+  "review": "REVIEW #8 (approve with changes)",
+  "method": "StratifiedGroupKFold(n_splits=5, shuffle=True)",
+  "random_state": 42,
+  "test_fold": 0,
+  "group": "host_id",
+  "stratify": "room_type",
+  "source_file": "data/raw/Listings.csv (city == New York)",
+  "source_sha256": "097b0bbfea3cce3cd9af7a717408c1027ca7f6dc947b7f27988a5c08085667db",
+  "n_listings": 37012,
+  "n_train": 29609,
+  "n_test": 7403,
+  "n_hosts_train": 21410,
+  "n_hosts_test": 5355,
+  "host_overlap": 0,
+  "task_counts": [
+    {
+      "task": "all listings",
+      "split": "train",
+      "rows": 29609,
+      "hosts": 21410,
+      "row_share_%": 80.0
+    },
+    {
+      "task": "all listings",
+      "split": "test",
+      "rows": 7403,
+      "hosts": 5355,
+      "row_share_%": 20.0
+    },
+    {
+      "task": "regression (price > 0)",
+      "split": "train",
+      "rows": 29587,
+      "hosts": 21392,
+      "row_share_%": 80.0
+    },
+    {
+      "task": "regression (price > 0)",
+      "split": "test",
+      "rows": 7397,
+      "hosts": 5350,
+      "row_share_%": 20.0
+    },
+    {
+      "task": "classification (superhost known)",
+      "split": "train",
+      "rows": 29594,
+      "hosts": 21397,
+      "row_share_%": 80.0
+    },
+    {
+      "task": "classification (superhost known)",
+      "split": "test",
+      "rows": 7400,
+      "hosts": 5352,
+      "row_share_%": 20.0
+    }
+  ],
+  "versions": {
+    "python": "3.11.18",
+    "pandas": "3.0.6",
+    "sklearn": "1.9.1"
+  }
+}
