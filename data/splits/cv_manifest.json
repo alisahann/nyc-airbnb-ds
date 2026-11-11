@@ -1,0 +1,42 @@
+{
+  "price": {
+    "decision": "D17",
+    "source": "train part of the D13 holdout",
+    "rows": 29587,
+    "hosts": 21392,
+    "filter": "price > 0",
+    "method": "StratifiedGroupKFold(n_splits=5, shuffle=True, random_state=42)",
+    "groups": "host_id",
+    "stratify": "room_type",
+    "row_order": "listing_id ascending",
+    "fold_sizes": [
+      5918,
+      5918,
+      5917,
+      5917,
+      5917
+    ],
+    "sklearn": "1.9.1",
+    "pandas": "3.0.6"
+  },
+  "superhost": {
+    "decision": "D17",
+    "source": "train part of the D13 holdout",
+    "rows": 29594,
+    "hosts": 21397,
+    "filter": "host_is_superhost known",
+    "method": "StratifiedGroupKFold(n_splits=5, shuffle=True, random_state=42)",
+    "groups": "host_id",
+    "stratify": "host_is_superhost",
+    "row_order": "listing_id ascending",
+    "fold_sizes": [
+      5919,
+      5919,
+      5919,
+      5918,
+      5919
+    ],
+    "sklearn": "1.9.1",
+    "pandas": "3.0.6"
+  }
+}
